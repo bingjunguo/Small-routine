@@ -5,48 +5,75 @@ using namespace std;
 ifstream fin;
 bool f;
 char sentence[100000000],input[100000000];
-string finsentence,fininput;
+string finsentence,finput;
 double ac;
 int len;
 int main(){  
+start:
+	system("cls");
 	fin.open("TEXT.TYPETRAINER"); 
-	cout<<"ÇëÑ¡ÔñÎÄ±¾À´Ô´£º"<<endl<<"1.ÎÄ¼þ"<<endl<<"0.Ëæ»ú"<<endl; 
+	cout<<"è¯·é€‰æ‹©æ–‡æœ¬æ¥æºï¼š"<<endl<<"1.æ–‡ä»¶"<<endl<<"0.éšæœº"<<endl; 
 	cin>>f;
-	for(len=ac=100;;len+=100,ac=100.0){
-	    system("cls");
-	    cout<<len<<"×Ö·ûÎÄ±¾"<<endl; 
-		if(f){
-	    	getline(fin,finsentence);
+	if(!f){ 
+			for(len=ac=100;;len+=100,ac=100.0){
+			    system("cls");
+			    cout<<len<<"å­—ç¬¦æ–‡æœ¬"<<endl; 
+				srand(time(0)); 
+				for(int i=0;i<len;i++){
+					sentence[i]=char(65+rand()%(65-122+1));
+					cout<<sentence[i];
+				}
+			Sleep(3000);
+			cout<<endl<<"è®¡æ—¶å¼€å§‹ï¼"<<endl;
+			double start,stop,durationTime;
+			start = clock();
 			for(int i=0;i<len;i++)
-				cout<<finsentence[i];
-	    }
-	    if(!f){
-			srand(time(0)); 
-			for(int i=0;i<len;i++){
-				sentence[i]=char(65+rand()%(65-122+1));
-				cout<<sentence[i];
+				 cin>>input[i];
+			for(int i=0;i<len;i++)
+				if(sentence[i]!=input[i]&&!f) ac-=100/double(len);
+			stop = clock();
+		    durationTime = ((double)(stop-start))/CLK_TCK;
+		    cout<<"è®¡æ—¶ç»“æŸï¼"<<endl; 
+		    system("cls");
+		    cout<<"æ‚¨ä¸€å…±èŠ±è´¹ï¼š"<<durationTime<<" ç§’å®Œæˆ"<<len<<"ä¸ªå­—ç¬¦çš„æ‰“å­—æµ‹è¯•ï¼"<<endl;
+		    cout<<"æ­£ç¡®çŽ‡ï¼š"<<ac<<"%"<<endl; 
+		    cout<<"æ‚¨çš„æ‰“å­—é€Ÿåº¦ï¼š"<<len/(durationTime/60)<<"å­—ç¬¦/åˆ†é’Ÿ"<<endl; 
+		    cout<<"æ‚¨çš„æ­£ç¡®æ‰“å­—é€Ÿåº¦ï¼š"<<len/(durationTime/60)*(ac*0.01)<<"å­—ç¬¦/åˆ†é’Ÿ"<<endl; 
+		    cout<<"åŠ æ²¹ï¼"<<endl; 
+		    Sleep(1000);
+		    system("pause");
 			}
 		}
-		Sleep(3000);
-		cout<<endl<<"¼ÆÊ±¿ªÊ¼£¡"<<endl;
-		double start,stop,durationTime;
-		start = clock();
-		if(f) getline(cin,fininput);
-		if(!f)
-		for(int i=0;i<len;i++)
-			 cin>>input[i];
-		for(int i=0;i<len;i++)
-			if(sentence[i]!=input[i]&&!f||finsentence[i]!=fininput[i]&&f) ac-=100/double(len);
-		stop = clock();
-	    durationTime = ((double)(stop-start))/CLK_TCK;
-	    cout<<"¼ÆÊ±½áÊø£¡"<<endl; 
-	    system("cls");
-	    cout<<"ÄúÒ»¹²»¨·Ñ£º"<<durationTime<<" ÃëÍê³É"<<len<<"¸ö×Ö·ûµÄ´ò×Ö²âÊÔ£¡"<<endl;
-	    cout<<"ÕýÈ·ÂÊ£º"<<ac<<"%"<<endl; 
-	    cout<<"ÄúµÄ´ò×ÖËÙ¶È£º"<<len/(durationTime/60)<<"×Ö·û/·ÖÖÓ"<<endl; 
-	    cout<<"ÄúµÄÕýÈ·´ò×ÖËÙ¶È£º"<<len/(durationTime/60)*(ac*0.01)<<"×Ö·û/·ÖÖÓ"<<endl; 
-	    cout<<"¼ÓÓÍ£¡"<<endl; 
-	    Sleep(1000);
-	    system("pause");
-	}
+	if(f){
+			ac=100;
+			system("cls");
+		   	getline(fin,finsentence);
+		   	fin.clear();
+		   	fin.sync();
+		   	cin.clear();
+		   	cin.sync();
+		   	len=finsentence.length();
+		   	cout<<len<<"å­—ç¬¦æ–‡æœ¬"<<endl; 
+			cout<<finsentence;
+		    Sleep(3000);
+			cout<<endl<<"è®¡æ—¶å¼€å§‹ï¼"<<endl;
+			double start,stop,durationTime;
+			start = clock();
+			getline(cin,finput);
+			for(int i=0;i<len;i++)
+				if(finsentence[i]!=finput[i]) ac-=100/double(len);
+			stop = clock();
+		    durationTime = ((double)(stop-start))/CLK_TCK;
+		    cout<<"è®¡æ—¶ç»“æŸï¼"<<endl; 
+		    system("cls");
+		    cout<<"æ‚¨ä¸€å…±èŠ±è´¹ï¼š"<<durationTime<<" ç§’å®Œæˆ"<<len<<"ä¸ªå­—ç¬¦çš„æ‰“å­—æµ‹è¯•ï¼"<<endl;
+		    cout<<"æ­£ç¡®çŽ‡ï¼š"<<ac<<"%"<<endl; 
+		    cout<<"æ‚¨çš„æ‰“å­—é€Ÿåº¦ï¼š"<<len/(durationTime/60)<<"å­—ç¬¦/åˆ†é’Ÿ"<<endl; 
+		    cout<<"æ‚¨çš„æ­£ç¡®æ‰“å­—é€Ÿåº¦ï¼š"<<len/(durationTime/60)*(ac*0.01)<<"å­—ç¬¦/åˆ†é’Ÿ"<<endl; 
+		    cout<<"åŠ æ²¹ï¼"<<endl; 
+		    Sleep(1000);
+		    system("pause");
+		    goto start;
+		}
+	return 0;
 }
