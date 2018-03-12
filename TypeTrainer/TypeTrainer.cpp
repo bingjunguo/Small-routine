@@ -27,8 +27,10 @@ start:
 			cout<<endl<<"计时开始！"<<endl;
 			double start,stop,durationTime;
 			start = clock();
-			for(int i=0;i<len;i++)
-				 cin>>input[i];
+			for(int i=0;i<len;i++){ 
+				input[i]=getch();
+				cout<<input[i];
+			}
 			for(int i=0;i<len;i++)
 				if(sentence[i]!=input[i]&&!f) ac-=100/double(len);
 			stop = clock();
